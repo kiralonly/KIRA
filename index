@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIRA</title>
+<!-- Adicionando favicon personalizado -->
+<link rel="shortcut icon" href="/home/kamylla/Downloads/KIRA/k.ico" type="image/x-icon">
+<style>
+    /* Estilos CSS para melhorar a aparência */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000; /* Fundo preto */
+        color: #fff; /* Texto branco */
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .translator {
+        text-align: center;
+    }
+    textarea {
+        width: 300px;
+        height: 150px;
+        margin: 10px;
+        background-color: #333; /* Cor de fundo mais escura */
+        color: #fff; /* Texto branco */
+        border: none; /* Remover borda */
+        padding: 5px; /* Adicionar um pequeno preenchimento */
+    }
+    textarea::placeholder {
+        color: #999; /* Cor do texto de espaço reservado */
+    }
+    button {
+        background-color: #555; /* Cor de fundo do botão */
+        color: #fff; /* Cor do texto do botão */
+        border: none; /* Remover borda */
+        padding: 10px 20px; /* Adicionar preenchimento ao botão */
+        cursor: pointer; /* Mudar o cursor ao pairar sobre o botão */
+    }
+    button:hover {
+        background-color: #777; /* Cor de fundo do botão ao pairar sobre ele */
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="translator">
+        <h2>KIRA</h2>
+        <textarea id="inputText" placeholder=" " oninput="window.translate()"></textarea>
+        <br>
+        <textarea id="outputText" placeholder=" " readonly></textarea>
+    </div>
+</div>
+
+<script>
+    // Dicionário de tradução
+    var translationDict = {
+        '//': 'A',
+        '/\\': 'B',
+        '/-': 'C',
+        '/<': 'D',
+        '/>': 'E',
+        '\\/': 'F',
+        '-/': 'G',
+        '</': 'H',
+        '>/': 'I',
+        '\\\\': 'J',
+        '^^': 'K',
+        '\\<': 'L',
+        '\\>': 'M',
+        '-\\': 'N',
+        '<\\': 'O',
+        '>\\': 'P',
+        '--': 'Q',
+        '-<': 'R',
+        '->': 'S',
+        '<-': 'T',
+        '>-': 'U',
+        '<<': 'V',
+        '<>': 'W',
+        '>>': 'X',
+        '><': 'Y',
+        '\\-': 'Z',
+        'A': '//',
+        'B': '/\\',
+        'C': '/-',
+        'D': '/<',
+        'E': '/>',
+        'F': '\\/',
+        'G': '-/',
+        'H': '</',
+        'I': '>/',
+        'J': '\\\\',
+        'K': '^^',
+        'L': '\\<',
+        'M': '\\>',
+        'N': '-\\',
+        'O': '<\\',
+        'P': '>\\',
+        'Q': '--',
+        'R': '-<',
+        'S': '->',
+        'T': '<-',
+        'U': '>-',
+        'V': '<<',
+        'W': '<>',
+        'X': '>>',
+        'Y': '><',
+        'Z': '\\-'
+    };
+
+    // Função para traduzir o texto ou código
+    window.translate = function() {
+        var inputText = document.getElementById("inputText").value.toUpperCase();
+        var translatedText = "";
+        var currentCode = "";
+        for (var i = 0; i < inputText.length; i++) {
+            var currentChar = inputText[i];
+            if (currentChar.match(/[A-Z]/)) {
+                // Se for uma letra, traduz para código
+                translatedText += translationDict[currentChar] || currentChar;
+            } else {
+                // Se não for uma letra, verifica se é um código e traduz para letra
+                currentCode += currentChar;
+                if (translationDict[currentCode]) {
+                    translatedText += translationDict[currentCode];
+                    currentCode = "";
+                }
+            }
+        }
+        document.getElementById("outputText").value = translatedText;
+    }
+</script>
+</body>
+</html>
