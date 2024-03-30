@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -113,7 +113,7 @@
         'X': '>>',
         'Y': '><',
         'Z': '\\-',
-        ' ': ' '
+        ' ': ' ' // Adicionando espaço
     };
 
     // Função para traduzir o texto ou código
@@ -123,11 +123,11 @@
         var currentCode = "";
         for (var i = 0; i < inputText.length; i++) {
             var currentChar = inputText[i];
-            if (currentChar.match(/[A-Z]/)) {
-                // Se for uma letra, traduz para código
+            if (currentChar.match(/[A-Z ]/)) { // Alterado para incluir espaço
+                // Se for uma letra ou espaço, traduz para código
                 translatedText += translationDict[currentChar] || currentChar;
             } else {
-                // Se não for uma letra, verifica se é um código e traduz para letra
+                // Se não for uma letra ou espaço, verifica se é um código e traduz para letra
                 currentCode += currentChar;
                 if (translationDict[currentCode]) {
                     translatedText += translationDict[currentCode];
