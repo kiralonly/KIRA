@@ -52,7 +52,7 @@
 <div class="container">
     <div class="translator">
         <h2>KIRA</h2>
-        <textarea id="inputText" placeholder=" " oninput="translate()"></textarea>
+        <textarea id="inputText" placeholder=" "></textarea>
         <br>
         <textarea id="outputText" placeholder=" " readonly></textarea>
     </div>
@@ -104,6 +104,9 @@
         }
         document.getElementById("outputText").value = translatedText;
     }
+
+    // Adicionando event listener para input no textarea
+    document.getElementById("inputText").addEventListener("input", translate);
 </script>
 </body>
 </html>
