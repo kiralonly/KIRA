@@ -96,7 +96,11 @@
         var translatedText = "";
         for (var i = 0; i < inputText.length; i++) {
             var currentChar = inputText[i];
-            translatedText += translationDict[currentChar] || currentChar;
+            if (translationDict[currentChar]) {
+                translatedText += translationDict[currentChar];
+            } else {
+                translatedText += currentChar;
+            }
         }
         document.getElementById("outputText").value = translatedText;
     }
