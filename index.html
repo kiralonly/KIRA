@@ -52,7 +52,7 @@
 <div class="container">
     <div class="translator">
         <h2>KIRA</h2>
-        <textarea id="inputText" placeholder=" " oninput="window.translate()"></textarea>
+        <textarea id="inputText" placeholder=" " oninput="translate()"></textarea>
         <br>
         <textarea id="outputText" placeholder=" " readonly></textarea>
     </div>
@@ -61,52 +61,42 @@
 <script>
     // Dicionário de tradução
     var translationDict = {
-    'a': 'j',
-    'b': 'l',
-    'c': 'o',
-    'd': 'c',
-    'e': 'q',
-    'f': 'm',
-    'g': 'z',
-    'h': 't',
-    'i': 'u',
-    'j': 'a',
-    'k': 's',
-    'l': 'k',
-    'm': 'g',
-    'n': 'b',
-    'o': 'd',
-    'p': 'i',
-    'q': 'v',
-    'r': 'x',
-    's': 'p',
-    't': 'w',
-    'u': 'f',
-    'v': 'y',
-    'w': 'r',
-    'x': 'n',
-    'y': 'e',
-    'z': 'h',
-    ' ': ' '
-};
+        'a': 'j',
+        'b': 'l',
+        'c': 'o',
+        'd': 'c',
+        'e': 'q',
+        'f': 'm',
+        'g': 'z',
+        'h': 't',
+        'i': 'u',
+        'j': 'a',
+        'k': 's',
+        'l': 'k',
+        'm': 'g',
+        'n': 'b',
+        'o': 'd',
+        'p': 'i',
+        'q': 'v',
+        'r': 'x',
+        's': 'p',
+        't': 'w',
+        'u': 'f',
+        'v': 'y',
+        'w': 'r',
+        'x': 'n',
+        'y': 'e',
+        'z': 'h',
+        ' ': ' '
+    };
+
     // Função para traduzir o texto ou código
-    window.translate = function() {
-        var inputText = document.getElementById("inputText").value.toUpperCase();
+    function translate() {
+        var inputText = document.getElementById("inputText").value.toLowerCase();
         var translatedText = "";
-        var currentCode = "";
         for (var i = 0; i < inputText.length; i++) {
             var currentChar = inputText[i];
-            if (currentChar.match(/[A-Z]/)) {
-                // Se for uma letra, traduz para código
-                translatedText += translationDict[currentChar] || currentChar;
-            } else {
-                // Se não for uma letra, verifica se é um código e traduz para letra
-                currentCode += currentChar;
-                if (translationDict[currentCode]) {
-                    translatedText += translationDict[currentCode];
-                    currentCode = "";
-                }
-            }
+            translatedText += translationDict[currentChar] || currentChar;
         }
         document.getElementById("outputText").value = translatedText;
     }
