@@ -46,12 +46,17 @@
     button:hover {
         background-color: #777; /* Cor de fundo do botão ao pairar sobre ele */
     }
+       /* Estilos para o link */
+    h2 a {
+        color: inherit; /* Herda a cor do texto do pai (branco) */
+        text-decoration: none; /* Remove o sublinhado */
+    }
 </style>
 </head>
 <body>
 <div class="container">
     <div class="translator">
-        <h2>KIRA</h2>
+        <h2><a href="https//www.instagram.com/kiralonly/" target="_blank">KIRA</a></h2>
         <textarea id="inputText" placeholder=" "></textarea>
         <br>
         <textarea id="outputText" placeholder=" " readonly></textarea>
@@ -87,17 +92,24 @@
         'x': 'n',
         'y': 'e',
         'z': 'h',
-        ' ': ' '
+        ' ': ' ',
+        // Adicione aqui outros caracteres especiais, como pontuação, se necessário
     };
 
-    // Função para traduzir o texto ou código
+    // Função para traduzir o texto
     function translate() {
         var inputText = document.getElementById("inputText").value.toLowerCase();
         var translatedText = "";
+
+        // Verificar se o texto parece ser uma criptografia
+        var isEncrypted = !/^[a-z ]*$/.test(inputText);
+
+        var translationDictToUse = isEncrypted ? reverseTranslationDict : directTranslationDict;
+
         for (var i = 0; i < inputText.length; i++) {
             var currentChar = inputText[i];
-            if (translationDict[currentChar]) {
-                translatedText += translationDict[currentChar];
+            if (translationDictToUse[currentChar]) {
+                translatedText += translationDictToUse[currentChar];
             } else {
                 translatedText += currentChar;
             }
@@ -107,6 +119,46 @@
 
     // Adicionando event listener para input no textarea
     document.getElementById("inputText").addEventListener("input", translate);
+
+    // Dicionário de tradução direta
+    var directTranslationDict = {
+        'a': 'j',
+        'b': 'l',
+        'c': 'o',
+        'd': 'c',
+        'e': 'q',
+        'f': 'm',
+        'g': 'z',
+        'h': 't',
+        'i': 'u',
+        'j': 'a',
+        'k': 's',
+        'l': 'k',
+        'm': 'g',
+        'n': 'b',
+        'o': 'd',
+        'p': 'i',
+        'q': 'v',
+        'r': 'x',
+        's': 'p',
+        't': 'w',
+        'u': 'f',
+        'v': 'y',
+        'w': 'r',
+        'x': 'n',
+        'y': 'e',
+        'z': 'h',
+        ' ': ' ',
+        // Adicione aqui outros caracteres especiais, como pontuação, se necessário
+    };
+
+    // Dicionário de tradução reversa
+    var reverseTranslationDict = {};
+    for (var key in directTranslationDict) {
+        if (directTranslationDict.hasOwnProperty(key)) {
+            reverseTranslationDict[directTranslationDict[key]] = key;
+        }
+    }
 </script>
 </body>
 </html>
